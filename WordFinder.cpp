@@ -2,9 +2,12 @@
 #include <fstream>
 #include <sstream>
 
+#include "Combinations.h"
+
 WordFinder::WordFinder(void) {
     std::string dictPath = this->readConfig();
     this->setDictionary(dictPath);
+    Combinations::combinationsBiggerThan("abcdefg", 3);
 }
 
 std::string WordFinder::readConfig(const std::string &path) {
