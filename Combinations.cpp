@@ -3,9 +3,6 @@
 #include <functional>
 #include <algorithm>
 
-static size_t fact(int n) {
-    return (n == 1 || n == 0) ? 1 : fact(n - 1) * n;
-}
 
 // def combinations_bigger_than(inp, k):
 // res = set()

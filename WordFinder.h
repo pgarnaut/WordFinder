@@ -12,10 +12,11 @@ public:
     std::vector<std::string> findWords(const std::string &letters, const std::string &requiredLetters);
     bool writeConfig(const std::string &path="./WordFinder.cfg");
     std::string readConfig(const std::string &path="./WordFinder.cfg");
-
+    std::vector<std::string> solve(const std::string &possible, const std::string &required);
 private:
+    bool wordExists(const std::string &word);
     const char *cfgPath = "./WordFinder.cfg";
-
+    std::vector<std::string> dict;
 };
 
 #endif // WORDFINDER_H

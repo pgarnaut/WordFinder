@@ -19,6 +19,8 @@ public:
 private slots:
     void on_actionSet_Dictionary_triggered();
 
+    void on_solveButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     WordFinder finder;
