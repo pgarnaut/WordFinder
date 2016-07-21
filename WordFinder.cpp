@@ -86,6 +86,12 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
     if (possible.length() <= MIN_WORD_SIZE || required.size() >= possible.length())
         return {};
     
+    std::string req = required;
+    std::string avail = possible;
+    
+    std::transform(avail.begin(), avail.end(), avail.begin(), ::tolower);
+    std::transform(req.begin(), req.end(), req.begin(), ::tolower);
+    
     auto containsAllChars = [](const std::string &haystack, const std::string &needles) -> bool {
         for (auto c : needles)
             if (haystack.find(c) == std::string::npos)
@@ -93,7 +99,7 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
         return true;
     };
     
-    if (!containsAllChars(possible, required))
+    if (!containsAllChars(avail, req))
         return {};
 
 
@@ -101,14 +107,14 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
         return a.size() < b.size();
     };
     
-    std::vector<std::string> combos = Combinations::combinationsBiggerThan(possible, MIN_WORD_SIZE);
+    std::vector<std::string> combos = Combinations::combinationsBiggerThan(avail, MIN_WORD_SIZE);
     cout << "NUMBER OF COMBINATIONS: " << combos.size() << endl;
     std::vector<std::string> res;
     //res.reserve(combos.size() * Combinations::fact(possible.size()));
 
     for (auto combo : combos) {
         do {
-            if (containsAllChars(combo, required) && std::binary_search(this->dict.begin(), this->dict.end(), combo))
+            if (containsAllChars(combo, req) && std::binary_search(this->dict.begin(), this->dict.end(), combo))
                 res.push_back(combo);
         } while(std::next_permutation(combo.begin(), combo.end()));
     }
