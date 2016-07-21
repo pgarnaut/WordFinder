@@ -82,9 +82,11 @@ bool WordFinder::setDictionary(const std::string &path) {
     return true;
 }
 
-std::vector<std::string> WordFinder::solve(const std::string &possible, const std::string &required) {
-    if (possible.length() <= MIN_WORD_SIZE || required.size() >= possible.length())
+std::vector<std::string> WordFinder::solve(const std::string &possible, const std::string &required, std::string &errMsg) {
+    if (possible.length() <= MIN_WORD_SIZE || required.size() >= possible.length()) {
+        errMsg = "input size is crap";
         return {};
+    }
     
     std::string req = required;
     std::string avail = possible;
@@ -99,8 +101,10 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
         return true;
     };
     
-    if (!containsAllChars(avail, req))
+    if (!containsAllChars(avail, req)) {
+        errMsg = "list of possible letters doesnt contain the list of required letters";
         return {};
+    }
 
 
     auto sizeSorter = [](const std::string &a, const std::string &b) {

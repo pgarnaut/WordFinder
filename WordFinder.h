@@ -11,7 +11,7 @@ public:
     bool setDictionary(const std::string &path="word_list.txt");
     bool writeConfig(const std::string &path="./WordFinder.cfg");
     std::string readConfig(const std::string &path="./WordFinder.cfg");
-    std::vector<std::string> solve(const std::string &possible, const std::string &required);
+    std::vector<std::string> solve(const std::string &possible, const std::string &required, std::string &errMsg);
 private:
     bool wordExists(const std::string &word);
     const char *cfgPath = "./WordFinder.cfg";
