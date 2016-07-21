@@ -25,9 +25,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -45,9 +45,9 @@
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -56,18 +56,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>255</red>
-        <green>0</green>
-        <blue>0</blue>
+        <red>170</red>
+        <green>170</green>
+        <blue>127</blue>
        </color>
       </brush>
      </colorrole>
@@ -91,43 +91,79 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="possibleLetters">
     <property name="geometry">
      <rect>
-      <x>72</x>
+      <x>100</x>
       <y>30</y>
       <width>171</width>
-      <height>20</height>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
      <string>available letters</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="requiredLetters">
     <property name="geometry">
      <rect>
-      <x>72</x>
-      <y>60</y>
-      <width>170</width>
-      <height>20</height>
+      <x>100</x>
+      <y>70</y>
+      <width>171</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Noto Sans</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <property name="placeholderText">
      <string>required letters</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser1">
+   <widget class="QListWidget" name="resultList">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>130</y>
+      <x>70</x>
+      <y>200</y>
       <width>256</width>
-      <height>192</height>
+      <height>311</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="solveButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>110</y>
+      <width>85</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Solve</string>
     </property>
    </widget>
   </widget>
@@ -137,21 +173,21 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>22</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuOptions">
     <property name="title">
-     <string>Options</string>
+     <string>Optio&amp;ns</string>
     </property>
     <addaction name="actionSet_Dictionary"/>
    </widget>
    <addaction name="menuOptions"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="mainStatusBar"/>
   <action name="actionSet_Dictionary">
    <property name="text">
-    <string>Set Dictionary</string>
+    <string>&amp;Set Dictionary</string>
    </property>
   </action>
  </widget>
