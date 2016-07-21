@@ -97,6 +97,10 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
         return {};
 
 
+    auto sizeSorter = [](const std::string &a, const std::string &b) {
+        return a.size() < b.size();
+    };
+    
     std::vector<std::string> combos = Combinations::combinationsBiggerThan(possible, MIN_WORD_SIZE);
     cout << "NUMBER OF COMBINATIONS: " << combos.size() << endl;
     std::vector<std::string> res;
@@ -109,6 +113,7 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
         } while(std::next_permutation(combo.begin(), combo.end()));
     }
     //cout << "NUMBER OF PERMUTATIONS: " << res.size() << endl;
+    std::sort(res.begin(), res.end(), sizeSorter);
     return res;
 
 }
