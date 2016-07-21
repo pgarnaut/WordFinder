@@ -22,6 +22,7 @@ private slots:
     void on_solveButton_clicked();
 
 private:
+    void showError(const std::string &msg);
     Ui::MainWindow *ui;
     WordFinder finder;
 };

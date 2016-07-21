@@ -2,6 +2,8 @@
 #include "ui_MainWindow.h"
 #include <QFileDialog>
 #include <QString>
+#include <QErrorMessage>
+#include <QMessageBox>
 
 #include <stdio.h>
 
@@ -32,9 +34,26 @@ void MainWindow::on_solveButton_clicked() {
     printf("kowabunga\n");
     printf("%s\n", this->ui->possibleLetters->text().toStdString().c_str());
     printf("%s\n", this->ui->requiredLetters->text().toStdString().c_str());
-    for (auto word : this->finder.solve(this->ui->possibleLetters->text().toStdString(),
-                       this->ui->requiredLetters->text().toStdString())) {
+
+    this->ui->resultList->clear();
+
+    std::string errMsg;
+    auto words = this->finder.solve(this->ui->possibleLetters->text().toStdString(),
+                               this->ui->requiredLetters->text().toStdString(), errMsg);
+
+    if (words.empty() && errMsg.length() > 0) {
+        this->showError(errMsg);
+        return;
+    }
+
+    for (auto word : words) {
 
         new QListWidgetItem(tr(word.c_str()), this->ui->resultList);
     }
+}
+
+void MainWindow::showError(const std::__cxx11::string &msg) {
+    QMessageBox messageBox;
+    messageBox.critical(0, "Error", msg.c_str());
+    //messageBox.setFixedSize(500,200);
 }

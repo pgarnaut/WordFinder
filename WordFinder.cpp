@@ -116,8 +116,12 @@ std::vector<std::string> WordFinder::solve(const std::string &possible, const st
     std::vector<std::string> res;
     //res.reserve(combos.size() * Combinations::fact(possible.size()));
 
-    for (auto combo : combos) {
+    for (std::string combo : combos) {
+        cout << "combo: " << combo << endl;
+        std::sort(combo.begin(), combo.end());
         do {
+            cout << "\tperm: " << combo << endl;
+            
             if (containsAllChars(combo, req) && std::binary_search(this->dict.begin(), this->dict.end(), combo))
                 res.push_back(combo);
         } while(std::next_permutation(combo.begin(), combo.end()));
