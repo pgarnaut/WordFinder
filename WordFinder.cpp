@@ -5,7 +5,7 @@
 #include <iterator>
 #include <cctype>
 #include <locale>
-
+#include <iostream>
 
 #include <unistd.h>
 
@@ -14,9 +14,8 @@
 
 #define MIN_WORD_SIZE 4
 
-using std::istream_iterator;
 
-
+using namespace std;
 
 // trim from start
 static inline std::string &ltrim(std::string &s) {
@@ -74,12 +73,11 @@ bool WordFinder::setDictionary(const std::string &path) {
               std::istream_iterator<std::string>(),
               std::back_inserter(this->dict));
 
-    printf("n words in dict: %lu\n", this->dict.size());
+    cout << "n words in dict: " << this->dict.size() << endl;
 
     std::sort(this->dict.begin(), this->dict.end());
 
-    // TODO: do something with dict word list here, read into a vector<string> ?
-    printf("read dict, wrote config\n");
+    cout << "read dict, wrote config" << endl;
 
     return true;
 }
@@ -87,17 +85,30 @@ bool WordFinder::setDictionary(const std::string &path) {
 std::vector<std::string> WordFinder::solve(const std::string &possible, const std::string &required) {
     if (possible.length() <= MIN_WORD_SIZE || required.size() >= possible.length())
         return {};
+    
+    auto containsAllChars = [](const std::string &haystack, const std::string &needles) -> bool {
+        for (auto c : needles)
+            if (haystack.find(c) == std::string::npos)
+                return false;
+        return true;
+    };
+    
+    if (!containsAllChars(possible, required))
+        return {};
 
 
     std::vector<std::string> combos = Combinations::combinationsBiggerThan(possible, MIN_WORD_SIZE);
+    cout << "NUMBER OF COMBINATIONS: " << combos.size() << endl;
     std::vector<std::string> res;
     //res.reserve(combos.size() * Combinations::fact(possible.size()));
 
     for (auto combo : combos) {
         do {
-            res.push_back(combo);
+            if (containsAllChars(combo, required) && std::binary_search(this->dict.begin(), this->dict.end(), combo))
+                res.push_back(combo);
         } while(std::next_permutation(combo.begin(), combo.end()));
     }
+    //cout << "NUMBER OF PERMUTATIONS: " << res.size() << endl;
     return res;
 
 }

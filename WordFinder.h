@@ -8,8 +8,7 @@ class WordFinder
 {
 public:
     WordFinder(void);
-    bool setDictionary(const std::string &path);
-    std::vector<std::string> findWords(const std::string &letters, const std::string &requiredLetters);
+    bool setDictionary(const std::string &path="word_list.txt");
     bool writeConfig(const std::string &path="./WordFinder.cfg");
     std::string readConfig(const std::string &path="./WordFinder.cfg");
     std::vector<std::string> solve(const std::string &possible, const std::string &required);
